@@ -6,6 +6,9 @@ import pandas as pd
 
 # Cargar el dataset
 df = pd.read_csv("energia_solar.csv")
+df["Latitud"] = df["Latitud"].astype(float)
+df["Longitud"] = df["Longitud"].astype(float)
+
 
 st.set_page_config(page_title="Mapa", layout="wide")
 
