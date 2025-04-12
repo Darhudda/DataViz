@@ -29,9 +29,12 @@ centro_lon = df_filtrado["Longitud"].mean()
 # Crear mapa
 m = folium.Map(location=[centro_lat, centro_lon], zoom_start=6)
 
+# Verificar que el nombre de columnas no tenga espacios
+df.columns = df.columns.str.strip()
+
 # Marcadores dinámicos
 if departamento_seleccionado == "Todos":
-    # Agrupar por departamento
+    # Agrupar por departamento (mostrar solo un punto promedio por depto)
     resumen = df.groupby("Departamento").agg({
         "Latitud": "mean",
         "Longitud": "mean",
@@ -55,7 +58,7 @@ if departamento_seleccionado == "Todos":
         ).add_to(m)
 else:
     # Mostrar todos los paneles del departamento seleccionado
-    for _, row in df_filtrado.iterrows():
+    for _, row in df[df["Departamento"] == departamento_seleccionado].iterrows():
         folium.CircleMarker(
             location=[row["Latitud"], row["Longitud"]],
             radius=6,
@@ -67,7 +70,7 @@ else:
                 f"Producción: {row['Producción_kWh']} kWh<br>"
                 f"Sol diario: {row['Horas_Sol_Diarias']} hrs"
             ),
-            tooltip=row["Departamento"]
+            tooltip=row["Panel_ID"]
         ).add_to(m)
 
 
