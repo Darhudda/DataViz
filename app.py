@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+from PIL import Image
 import pandas as pd
 
 # Configuración de la app
@@ -18,8 +19,8 @@ if selected == "Inicio":
         Esta aplicación interactiva permite explorar datos de **producción solar** 
         en diferentes departamentos de **Colombia**, a través de mapas y dashboards.
 
-        **¿Qué puedes hacer aquí?**
-        - Visualizar en un mapa la ubicación de paneles solares con su producción energética.
+        **¿Qué puedes hacer aquí...?**
+        - Visualizar en un mapa la ubicación de paneles solares con su producción energética. 
         - Filtrar por departamento o características específicas.
         - Analizar patrones de producción según variables como las horas de sol.
 
@@ -28,7 +29,10 @@ if selected == "Inicio":
     )
 
     # Imagen alusiva
-    st.image("https://cdn.pixabay.com/photo/2015/01/28/23/35/solar-panel-615533_960_720.jpg", caption="Paneles solares en Colombia", use_column_width=True)
+    imagen = Image.open("panel_solar.jpg")
+    st.image(imagen, caption="Paneles solares en Colombia", use_column_width=True)
+    st.caption("Imagen tomada de [Ministerio de Minas y Energía de Colombia](https://www.minenergia.gov.co/)")
+
 
     # Carga rápida del CSV y resumen
     df = pd.read_csv("energia_solar.csv")
@@ -40,7 +44,7 @@ if selected == "Inicio":
         - Total de registros: **{len(df)}**
         - Departamentos incluidos: **{df['Departamento'].nunique()}**
         - Producción promedio: **{round(df['Producción_kWh'].mean(), 2)} kWh**
-        - Rango de horas de sol: **{df['Horas_Sol'].min()} - {df['Horas_Sol'].max()} horas**
+        - Rango de horas de sol: **{df['Horas_Sol_Diarias'].min()} - {df['Horas_Sol_Diarias'].max()} horas**
         """
     )
 
