@@ -30,8 +30,8 @@ if selected == "Inicio":
 
     # Imagen alusiva
     imagen = Image.open("panel_solar.jpg")
-    st.image(imagen, caption="Paneles solares en Colombia", use_column_width=True)
-    st.caption("Imagen tomada de [Ministerio de Minas y Energía de Colombia](https://www.minenergia.gov.co/)")
+    st.image(imagen, caption="Paneles solares en Colombia", use_container_width=True)
+    st.caption("Imagen tomada de [Ministerio de Minas y Energía de Colombia](https://www.minenergia.gov.co/es/sala-de-prensa/noticias-index/la-transici%C3%B3n-energ%C3%A9tica-avanza-en-colombia-en-cesar-se-inaugur%C3%B3-el-parque-solar-la-loma-con-387-hect%C3%A1reas-de-paneles-solares/)")
 
 
     # Carga rápida del CSV y resumen
