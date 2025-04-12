@@ -30,16 +30,46 @@ centro_lon = df_filtrado["Longitud"].mean()
 m = folium.Map(location=[centro_lat, centro_lon], zoom_start=6)
 
 # Marcadores dinámicos
-for _, row in df_filtrado.iterrows():
-    folium.CircleMarker(
-        location=[row["Latitud"], row["Longitud"]],
-        radius=6,
-        color="blue",
-        fill=True,
-        fill_opacity=0.7,
-        popup=f"<b>{row['Panel_ID']}</b><br>Producción: {row['Producción_kWh']} kWh<br>Sol diario: {row['Horas_Sol_Diarias']} hrs",
-        tooltip=row["Departamento"]
-    ).add_to(m)
+if departamento_seleccionado == "Todos":
+    # Agrupar por departamento
+    resumen = df.groupby("Departamento").agg({
+        "Latitud": "mean",
+        "Longitud": "mean",
+        "Producción_kWh": "mean",
+        "Horas_Sol_Diarias": "mean"
+    }).reset_index()
+
+    for _, row in resumen.iterrows():
+        folium.CircleMarker(
+            location=[row["Latitud"], row["Longitud"]],
+            radius=8,
+            color="green",
+            fill=True,
+            fill_opacity=0.7,
+            popup=(
+                f"<b>{row['Departamento']}</b><br>"
+                f"Prom. Producción: {round(row['Producción_kWh'], 2)} kWh<br>"
+                f"Prom. Sol: {round(row['Horas_Sol_Diarias'], 2)} hrs"
+            ),
+            tooltip=row["Departamento"]
+        ).add_to(m)
+else:
+    # Mostrar todos los paneles del departamento seleccionado
+    for _, row in df_filtrado.iterrows():
+        folium.CircleMarker(
+            location=[row["Latitud"], row["Longitud"]],
+            radius=6,
+            color="blue",
+            fill=True,
+            fill_opacity=0.7,
+            popup=(
+                f"<b>{row['Panel_ID']}</b><br>"
+                f"Producción: {row['Producción_kWh']} kWh<br>"
+                f"Sol diario: {row['Horas_Sol_Diarias']} hrs"
+            ),
+            tooltip=row["Departamento"]
+        ).add_to(m)
+
 
 # Mostrar mapa
 st_data = st_folium(m, width=800, height=500)
