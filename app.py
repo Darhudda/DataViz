@@ -33,6 +33,13 @@ if selected == "Inicio":
     st.image(imagen, caption="Paneles solares en Colombia", use_container_width=True)
     st.caption("Imagen tomada de [Ministerio de Minas y Energía de Colombia](https://www.minenergia.gov.co/es/sala-de-prensa/noticias-index/la-transici%C3%B3n-energ%C3%A9tica-avanza-en-colombia-en-cesar-se-inaugur%C3%B3-el-parque-solar-la-loma-con-387-hect%C3%A1reas-de-paneles-solares/)")
 
+    st.markdown(
+        """
+        La base de datos contiene registros con la ubicación geográfica de los paneles solares (latitud y longitud),
+        el departamento al que pertenecen, un identificador único por panel, la cantidad de energía producida en kWh
+        y las horas promedio de sol diarias registradas para cada ubicación.
+        """
+    )
 
     # Carga rápida del CSV y resumen
     df = pd.read_csv("energia_solar.csv")
@@ -45,8 +52,21 @@ if selected == "Inicio":
         - Departamentos incluidos: **{df['Departamento'].nunique()}**
         - Producción promedio: **{round(df['Producción_kWh'].mean(), 2)} kWh**
         - Rango de horas de sol: **{df['Horas_Sol_Diarias'].min()} - {df['Horas_Sol_Diarias'].max()} horas**
+
+        ---
         """
     )
+
+    st.subheader("¿Por qué se hace este análisis?")
+    st.markdown(
+    """
+    En el marco de la transición energética, conocer el comportamiento de los paneles solares 
+    es esencial para **tomar decisiones informadas** sobre expansión, mantenimiento y eficiencia energética. 
+    Esta herramienta contribuye al análisis de la **producción solar a nivel regional**.
+    """
+)
+
+    st.info("Utiliza el menú de la izquierda para acceder al **Mapa Interactivo** y al **Dashboard de análisis**.")
 
 elif selected == "Mapa":
     st.switch_page("pages/1_Mapa.py")
