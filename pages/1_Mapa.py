@@ -4,7 +4,7 @@ import folium
 from streamlit_folium import st_folium
 
 st.set_page_config(page_title="Mapa", layout="wide")
-st.title("🗺️ Mapa Interactivo de Producción Solar")
+st.title("Mapa Interactivo de Producción Solar")
 
 # Cargar datos
 df = pd.read_csv("energia_solar.csv")
@@ -86,7 +86,7 @@ if departamento_seleccionado != "Todos":
     sol_prom = round(df_filtrado["Horas_Sol_Diarias"].mean(), 2)
     num_paneles = len(df_filtrado)
 
-    st.subheader(f"🔎 Datos generales para {departamento_seleccionado}")
+    st.subheader(f"Datos generales para {departamento_seleccionado}")
     st.markdown(
         f"""
         - Número de paneles registrados: **{num_paneles}**  
@@ -95,7 +95,7 @@ if departamento_seleccionado != "Todos":
         """
     )
 
-    st.subheader("📋 Paneles solares registrados")
+    st.subheader("Paneles solares registrados")
     for _, row in df_filtrado.iterrows():
         st.markdown(
             f"""

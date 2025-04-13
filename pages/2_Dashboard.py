@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 st.set_page_config(page_title="Dashboard", layout="wide")
-st.title("📊 Dashboard de Producción Solar en Colombia")
+st.title("Dashboard de Producción Solar en Colombia")
 
 # Cargar datos
 df = pd.read_csv("energia_solar.csv")
@@ -30,7 +30,7 @@ with col2:
 st.markdown("---")
 
 # Gráfico de barras: promedio por departamento (producción + horas)
-st.subheader("📊 Comparación por Departamento (Promedios)")
+st.subheader("Comparación por Departamento (Promedios)")
 if dep_seleccionado == "Todos":
     resumen = df.groupby("Departamento").agg({
         "Producción_kWh": "mean",
@@ -43,7 +43,7 @@ if dep_seleccionado == "Todos":
     st.plotly_chart(fig_bar, use_container_width=True)
 
 # Scatter plot
-st.subheader("🌞 Relación entre Horas de Sol y Producción")
+st.subheader("Relación entre Horas de Sol y Producción")
 fig_scatter = px.scatter(df_filtrado, x="Horas_Sol_Diarias", y="Producción_kWh",
                          color="Departamento" if dep_seleccionado == "Todos" else None,
                          title="Horas de Sol vs Producción", trendline="ols")
@@ -51,7 +51,7 @@ st.plotly_chart(fig_scatter, use_container_width=True)
 
 # Boxplot por departamento (solo si no hay filtro)
 if dep_seleccionado == "Todos":
-    st.subheader("📦 Variabilidad de Producción por Departamento (Boxplot)")
+    st.subheader("Variabilidad de Producción por Departamento (Boxplot)")
     fig_box = px.box(df, x="Departamento", y="Producción_kWh",
                      title="Distribución de Producción por Departamento")
     st.plotly_chart(fig_box, use_container_width=True)

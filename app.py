@@ -19,7 +19,7 @@ if selected == "Inicio":
         Esta aplicación interactiva permite explorar datos de **producción solar** 
         en diferentes departamentos de **Colombia**, a través de mapas y dashboards.
 
-        **¿Qué puedes hacer aquí...?**
+        **¿Qué puedes hacer aquí?**
         - Visualizar en un mapa la ubicación de paneles solares con su producción energética. 
         - Filtrar por departamento o características específicas.
         - Analizar patrones de producción según variables como las horas de sol.
