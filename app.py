@@ -13,7 +13,7 @@ with st.sidebar:
 
 # Página de inicio con contexto
 if selected == "Inicio":
-    st.title("Bienvenido a la App Interactiva 🌞")
+    st.title("Bienvenido/a a la App Interactiva 🌞")
     st.markdown(
         """
         Esta aplicación interactiva permite explorar datos de **producción solar** 
